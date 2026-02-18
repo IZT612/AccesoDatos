@@ -9,10 +9,33 @@ import org.springframework.web.bind.annotation.*;
 
 import com.ejemplo.alumnos.entity.Alumno;
 import com.ejemplo.alumnos.repository.AlumnoRepository;
+import com.ejemplo.alumnos.security.dtos.AlumnoDTO;
+
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/alumnos")
 public class AlumnoController {
+	
+	@PostMapping("/validar")
+    public String registrarAlumno(@Valid @RequestBody AlumnoDTO alumno) {
+        return "Alumno validado correctamente: " + alumno.getEmail();
+    }
+	
+    @GetMapping("/")
+    public String home() {
+        return "App funcionando";
+    }
+
+    @GetMapping("/hola")
+    public String hola() {
+        return "¡Hola Mundo desde Spring Boot!";
+    }
+    
+    @GetMapping("/saludo/{nombre}")
+    public String saludo(@PathVariable String nombre) {
+        return "¡Hola " + nombre + "!";
+    }
 
     @Autowired
     private AlumnoRepository repo;
