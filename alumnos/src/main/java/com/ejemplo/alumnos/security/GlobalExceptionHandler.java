@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import java.util.HashMap;
 import java.util.Map;
 
-@ControllerAdvice // Centraliza el manejo de excepciones
+@ControllerAdvice 
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -16,7 +16,7 @@ public class GlobalExceptionHandler {
         ex.getBindingResult().getFieldErrors().forEach(error -> 
             errores.put(error.getField(), error.getDefaultMessage())
         );
-        // Devuelve un JSON estructurado con los errores
+
         return ResponseEntity.badRequest().body(errores);
     }
 }
